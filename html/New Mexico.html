@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <title>New Mexico</title>
+    <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
+
+    <link rel="shortcut icon" href="../images/newMexicoIcon.ico" type="image/x-icon">
+    <link rel="icon" href="../images/newMexicoIcon.ico"  type="image/x-icon">
+
+    <link rel="stylesheet" href="../css/style.css">
+    </head>
+
+<body>
+    <img src="../images/newMexicoFlag.jpg" alt="New Mexico Flag">
+    <script type="text/javascript">
+        // Date,VADATA.Death,VADATA.DeathConfirmed
+        var d1 = "https://raw.githubusercontent.com/freemanbach/Python/master/python3/covid/nmdata.csv"
+        Plotly.d3.csv(d1, function (err, rows) {
+            function unpack(rows, key) {
+                return rows.map(function (row) { return row[key]; });
+            }
+            var t1 = {
+                type: "scatter",
+                mode: "lines",
+                name: 'New Mexico Total Deaths',
+                x: unpack(rows, 'Date'),
+                y: unpack(rows, 'NMDATA.Death'),
+                line: { color: '#FFFB00' }
+            }
+            var t2 = {
+                type: "scatter",
+                mode: "lines",
+                name: 'New Mexico Confirmed Deaths',
+                x: unpack(rows, 'Date'),
+                y: unpack(rows, 'NMDATA.DeathConfirmed'),
+                line: { color: '#CE2B14' }
+            }
+            var data = [t1, t2];
+            var layout = {
+                title: 'New Mexico Total Deaths and Confirmed Deaths',
+            };
+            Plotly.newPlot('myplot', data, layout);
+        })
+    </script>
+    <div id="myplot">
+    </div>
+    <div>
+        <p> Data were pulled from this Data Warehouse plant: <a href="https://covidtracking.com">The COVID Tracking
+                Project</a>
+            Information pertains to this project can be found <a href="https://covidtracking.com/about">here</a>.
+        </p>
+    </div>
+</body>
+
+</html>

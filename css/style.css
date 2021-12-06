@@ -1,0 +1,22 @@
+@font-face {
+    font-family: font;
+    src: url(../css/ReadexPro-Regular.ttf);
+}
+
+img {  
+    max-height: 200px;
+    max-width: 200px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    }  
+
+h2 {
+    font-family: font;
+    text-align: center;
+}
+
+div{
+    font-family: font;
+    text-align: center;
+}

@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title> Oregon </title>
+    <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
+
+    <link rel="shortcut icon" href="../images/oregonIcon.ico" type="image/x-icon">
+    <link rel="icon" href="../images/oregonIcon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href="../css/style.css">
+    </head>
+
+<body>
+    <img src="../images/oregonFlag.jpg" alt="Oregon Flag">
+
+    <script type="text/javascript">
+        // Date,VADATA.Death,VADATA.DeathConfirmed
+        var d1 = "https://raw.githubusercontent.com/freemanbach/Python/master/python3/covid/ordata.csv"
+        Plotly.d3.csv(d1, function (err, rows) {
+            function unpack(rows, key) {
+                return rows.map(function (row) { return row[key]; });
+            }
+            var t1 = {
+                type: "scatter",
+                mode: "lines",
+                name: 'Oregon Total Deaths',
+                x: unpack(rows, 'Date'),
+                y: unpack(rows, 'ORDATA.Death'),
+                line: { color: '#112A92' }
+            }
+            var t2 = {
+                type: "scatter",
+                mode: "lines",
+                name: 'Oregon Confirmed Deaths',
+                x: unpack(rows, 'Date'),
+                y: unpack(rows, 'ORDATA.DeathConfirmed'),
+                line: { color: '#FFFB00' }
+            }
+            var data = [t1, t2];
+            var layout = {
+                title: 'Oregon Total Deaths and Confirmed Deaths',
+            };
+            Plotly.newPlot('myplot', data, layout);
+        })
+    </script>
+    <div id="myplot">
+    </div>
+    <div>
+        <p> Data were pulled from this Data Warehouse plant: <a href="https://covidtracking.com">The COVID Tracking
+                Project</a>
+            Information pertains to this project can be found <a href="https://covidtracking.com/about">here</a>.
+        </p>
+    </div>
+</body>
+
+</html>
